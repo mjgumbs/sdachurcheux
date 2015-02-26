@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load page_tags %}
+
+
+{% block nav %}
+<ul>
+    {% get_root_pages "news:post-list" as root_pages %}
+    {% for page, page_active in root_pages %}
+        <li><a href="{{ page.get_absolute_url }}"{% if page_active %} class="active"{% endif %}>{{ page.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock nav %}
+
+{% block subnav %}
+    <h1 style="font-size: 2em;margin: .67em 0;font-weight:normal;padding: 0 20px;">News</h1>
+    <p style="padding: 0 20px">The main purpose of this page is to serve and direct readers to articles of recent or current events.</p>
+{% endblock %}

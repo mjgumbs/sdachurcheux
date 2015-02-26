@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load page_tags %}
+
+
+{% block nav %}
+<ul>
+    {% get_root_pages "events:events-home" as root_pages %}
+    {% for page, page_active in root_pages %}
+        <li><a href="{{ page.get_absolute_url }}"{% if page_active %} class="active"{% endif %}>{{ page.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock nav %}
+
+{% block subnav %}
+    <h1 style="font-size: 2em;margin: .67em 0;font-weight:normal;padding: 0 20px;">Announcements</h1>
+    <p style="padding: 0 20px">If you are looking for information about our regular activities during the week or the special events we run from time to time bookmark this page. </p>
+{% endblock %}

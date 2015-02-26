@@ -1,0 +1,34 @@
+{% extends "events/base.html" %}
+{% load thumbnail %}
+
+
+{% block title %}{{ object.title }} - Events - {{ block.super }}{% endblock %}
+
+{% block pagetitle %}<a href="{% url 'events:events-home' %}">Events</a>{% endblock %}
+
+{% block content %}
+<div class="event-detail">
+    {% if object.image %}
+        {% thumbnail object.image.file 480x360 upscale as thumb %}
+        <a href="{{ object.get_absolute_url }}"><img src="{{ thumb.url }}" alt="{{ object }}" /></a>
+    {% endif %}
+    <h1 class="title">{{ object.title }}</h1>
+    <h6>
+        {{ object.start|date:"j M Y g:iA" }}
+
+        {% if object.start != object.end %}
+            &mdash;
+
+            {% if object.start.date != object.end.date %}
+                {{ object.end|date:"j M Y" }}
+            {% endif %}
+
+            {{ object.end|date:"g:iA" }}
+        {% endif %}
+    </h6>
+    <div class="event-content">
+        {{ object.description|safe }}
+    </div>
+    <a class="more" href="{% url 'events:events-home' %}">Back to events</a>
+</div>
+{% endblock content %}

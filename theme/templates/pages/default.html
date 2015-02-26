@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load page_tags %}
+
+
+{% block title %}{{ page.title }} - {{ block.super }}{% endblock %}
+
+{% block pagetitle %}<a href="{{ page.get_absolute_url }}">{{ page.title }}</a>{% endblock %}
+
+
+{% block nav %}
+<ul>
+    <input type="checkbox" id="toggle-nav" />
+    <label for="toggle-nav" class="toggle-nav" onclick></label>
+    <ul class="menu-nav">
+        {% get_root_pages page as root_pages %}
+        {% for page, page_active in root_pages %}
+            <li><a href="{{ page.get_absolute_url }}"{% if page_active %} class="active"{% endif %}>{{ page.title }}</a></li>
+        {% endfor %}
+    </ul>
+</ul>
+{% endblock nav %}
+
+
+{% block subnav %}
+<div class="subnav">
+    <input type="checkbox" id="toggle" />
+    <label for="toggle" class="toggle" onclick></label>
+    <ul class="menu">
+        {% get_pages_at_level page as subnav_pages %}
+        {% if subnav_pages %}
+            {% for page, page_active in subnav_pages %}
+                <li><a href="{{ page.get_absolute_url }}"{% if page_active %} class="active"{% endif %}>{{ page.title }}</a></li>
+            {% endfor %}
+        {% endif %}
+        <li><a href="https://www.facebook.com/statiasda" target="_blank">Facebook</a></li>
+    </ul>
+</div>
+
+{% endblock subnav %}
+
+
+{% block content %}
+<p>{{ page.content|safe }}</p>
+{% endblock content %}

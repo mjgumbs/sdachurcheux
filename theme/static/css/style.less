@@ -1,0 +1,557 @@
+@import (less) "normalize.css";
+
+////////////////////////////////////////////////////////////////////////////////
+// text-header theme
+
+@brand-color: #184f2c;
+@text-color:  #222222;
+@alt-color:   white;
+
+a {
+    color: @brand-color;
+    text-decoration: none;
+    &:hover {
+        color: @text-color;
+    }
+}
+
+hr {
+    margin: 0.5em 0;
+    height: 0.0625em;
+    background: lighten(@text-color, 70%);
+    border: none;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// structure
+
+body {
+    background: @text-color;
+    color: @alt-color;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+}
+
+.page {
+    padding-bottom: 3em;
+    background: @alt-color;
+    color: @text-color;
+}
+
+.head {
+    overflow: hidden;
+    background: @alt-color;
+    color: @text-color;
+    border-bottom: 0.5em solid @brand-color;
+}
+
+@width: 52em;
+
+.main {
+    display: table;
+    margin: 0 auto;
+    width: @width;
+
+    .side, .content {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    .side {
+        width: @width * 0.382 - 2em;
+    }
+
+    .content {
+        margin-left: @width * 0.382 -2em;
+        .wrap {
+            margin: 1em 2.625em;
+            padding: 1em 0;
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// header
+
+.head {
+    .wrap {
+        overflow: hidden;
+        width: @width;
+        margin: 0 auto;
+    }
+    h1 {
+        float: left;
+        margin: 0;
+        font-size: 1em;
+        a {
+            display: block;
+            width: @width * 0.382 - 2em;
+            height: 117px;
+            background: url(../img/logo.png) top center no-repeat;
+            overflow: hidden;
+            text-indent: -100em;
+        }
+    }
+}
+
+.nav {
+    ul {
+        margin: 0;
+        padding: 0;
+        text-align: right;
+    }
+    li {
+        display: inline-block;
+    }
+    a {
+        position: relative;
+        display: block;
+        float: left;
+        line-height: 117px;
+        padding: 0 0.5em;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        color: @text-color;
+        &.active, &:hover {
+            color: @brand-color;
+            &:after {
+                position: absolute;
+                display: block;
+                content: ' ';
+                width: 3em;
+                height: 0.06em;
+                left: 50%;
+                margin-left: -1.5em;
+                top: 73px;
+                background: @text-color;
+            }
+        }
+        &.active:after { background: @brand-color; }
+    }
+}
+
+#toggle-nav, .toggle-nav { display: none; }
+
+@media all and (max-width: 768px) {
+    .toggle-nav {
+        display: block;
+        cursor: pointer;
+        background: @text-color;
+        color: white;
+        text-align: center;
+    }
+    .toggle-nav:after {
+        content: 'Open Menu';
+        display: block;
+        padding: 0 1em;
+        line-height: 2.5em;
+        text-transform: uppercase;
+    }
+    #toggle-nav:checked + .toggle-nav:after{
+        display: none;
+    }
+    .menu-nav {
+        display: none;
+    }
+    #toggle-nav:checked ~ .menu-nav {
+        display: block;
+        opacity: 1;
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// main content
+
+.box {
+    box-shadow: 0 1em 2em lighten(@text-color, 80%);
+    border: 0.0625em solid lighten(@text-color, 70%);
+    border-top: none;
+}
+
+.side {
+    background: @alt-color;
+    padding-bottom: 3em;
+
+    .box {
+        overflow: hidden;
+        border-right: none;
+    }
+    h1 {
+        margin: 0;
+    }
+    img {
+        width: 100%;
+        height: auto;
+        border-bottom: 0.1625em solid lighten(@text-color, 70%);
+    }
+}
+
+#toggle, .toggle { display: none; }
+
+@media only screen and (max-width: 768px){
+    .menu { display: none; opacity: 0; width: 100%; }
+    .menu > li { display: inline-block; width: 100%; margin: 0; padding: 0;
+        border-top: 0.0625em solid lighten(@text-color, 70%);}
+    .menu > li > a {
+        display: block;
+        padding: 0 1em;
+        line-height: 2.5em;
+        color: @text-color;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        &:hover, &.active {
+            color: @brand-color;
+        }
+        &:after { display: none; }
+    }
+    .toggle {
+        display: block;
+        cursor: pointer;
+        background: @text-color;
+        color: white;
+        text-align: center;
+    }
+    #toggle:checked ~ .menu { display: block; opacity: 1; }
+}
+@media only screen and (max-width: 768px){
+
+    .menu, .menu > li, .menu > li > a{
+        height: auto;
+    }
+
+    .toggle:after {
+        content: 'Open Menu';
+        display: block;
+        padding: 0 1em;
+        line-height: 2.5em;
+        text-transform: uppercase;
+    }
+
+    #toggle:checked + .toggle:after{
+        content: 'Close Menu';
+    }
+}
+
+
+.subnav {
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        padding: 0;
+        border-top: 0.0625em solid lighten(@text-color, 70%);
+    }
+    li:first-child {
+        border-top: none;
+    }
+    a {
+        display: block;
+        padding: 0 1em;
+        line-height: 2.5em;
+        color: @text-color;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        &:hover, &.active {
+            color: @brand-color;
+        }
+    }
+}
+
+.content {
+    background: @alt-color;
+
+    h1, h2, h3 {
+        font-weight: normal;
+    }
+    h6 {
+        text-transform: uppercase;
+        color: lighten(@text-color, 30%);
+    }
+
+    .events, .news {
+        display: table-cell;
+        width: 50%;
+        overflow: hidden;
+        position: relative;
+        background: @brand-color;
+        border-top: 0.0625em solid darken(@brand-color, 15%);
+
+        h2 {
+            padding-top: 0.2em;
+            padding-left: 1em;
+            padding-right: 0.5em;
+            font-weight: normal;
+            margin-bottom: 0;
+            a { color: @text-color; }
+        }
+        a {
+            color: @alt-color;
+            &:hover {
+                color: @text-color;
+            }
+        }
+        p {
+            padding-left: 1.5em;
+            padding-right: 1em;
+        }
+        h3 {
+            margin: 2em 0 0 0;
+            border-top: 0.0625em solid darken(@brand-color, 15%);
+            a {
+                display: block;
+                padding-left: 1.2em;
+                line-height: 3em;
+                color: @alt-color;
+            }
+        }
+    }
+    .events {
+        background: darken(@brand-color, 10%);
+        h2:before {
+            display: block;
+            content: ' ';
+            box-shadow: 0 0.67em 0.75em darken(@brand-color, 20%);
+            width: 1em;
+            position: absolute;
+            top: -1em;
+            left: -1em;
+            bottom: -1em;
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// news
+
+.more {
+    display: block;
+    float: right;
+    line-height: 1.625;
+    border: 0.25em solid @brand-color;
+    padding: 0.1em 1em 0 1em;
+    &.ical { margin-top: -5em; }
+    &:hover {
+        background: @brand-color;
+        color: @alt-color;
+    }
+}
+
+.post-list {
+    padding: 0;
+
+    li {
+        overflow: hidden;
+        padding: 0 0 2em 0;
+        list-style: none;
+        border-bottom: .0625em solid lighten(@text-color, 70%);
+    }
+    .image {
+        padding-top: 2em;
+    }
+}
+
+.post {
+    &.summary.image {
+        img {
+            display: block;
+            height: auto;
+        }
+    }
+    &.detail {
+        padding: 1em 0;
+        &.image {
+            img {
+                display: block;
+                margin: -3em -2.625em 1em -2.625em;
+            }
+        }
+    }
+}
+
+.pagination {
+    overflow: hidden;
+    padding: 1em 0;
+    .prev, .next {
+        .more;
+    }
+    .prev { float: left; }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// events
+
+.events-table {
+    margin: -2em -2.625em;
+    width: @width - (@width * 0.382 - 2em);
+    display: table;
+    border-top: 0.0625em solid lighten(@text-color, 70%);
+    overflow: hidden;
+
+    h1 {
+        padding-left: 0.625em;
+    }
+
+    section {
+        display: table-cell;
+        width: 50%;
+        h2 {
+            padding-left: 0.75em;
+        }
+        &.regular-events {
+            border-right: .0625em solid lighten(@text-color, 70%);
+            box-shadow: 0 0 2em lighten(@text-color, 70%);
+            h3 {
+                position: absolute;
+                margin-left: 0.625em;
+                border-left: 0.25em solid @brand-color;
+                padding-left: 0.25em;
+                text-transform: uppercase;
+            }
+        }
+    }
+    .event-list {
+        margin: 0;
+        padding: 0;
+        border: none;
+        overflow: hidden;
+        &.odd {
+            background-color: lighten(@text-color, 82%);
+        }
+        li {
+            margin-left: 4.625em;
+            padding-bottom: 1em;
+            border-top: 0.0625em solid lighten(@text-color, 70%);
+            border-bottom: none;
+            &:first-child { border-top: none; }
+        }
+        h4, h5, p {
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        h5 {
+            margin: 0.5em 0;
+            text-transform: uppercase;
+            color: lighten(@text-color, 40%);
+        }
+        p {
+            margin-top: 0;
+            font-size: 0.83em;
+        }
+        img {
+            width: 3em;
+            position: absolute;
+            margin-left: -3.5em;
+        }
+    }
+    .special-events {
+        p {
+            padding: 0 20px;
+        }
+        .event-list li.noimage {
+            margin: 0;
+            padding-left: 1em;
+        }
+        .more {
+            float: none;
+            margin: 1em 1em;
+            text-align: center;
+        }
+    }
+}
+
+.event-detail {
+    overflow: hidden;
+}
+
+.event-list {
+    padding: 0;
+    li {
+        padding: 0 0 3em 0;
+        list-style: none;
+        border-bottom: .0625em solid lighten(@text-color, 70%);
+    }
+}
+
+.event {
+    &.summary.image {
+        img {
+            display: block;
+            height: auto;
+        }
+    }
+    &.detail {
+        padding: 1em 0;
+        &.image {
+            img {
+                display: block;
+                margin: -3em -2.625em 1em -2.625em;
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// footer
+
+.foot {
+    width: @width;
+    margin: 0 auto;
+    p { float: left; }
+    ul {
+        padding: 0;
+        float: right;
+
+        li {
+            display: inline;
+            margin-left: 2em;
+        }
+    }
+    a {
+        color: @brand-color;
+        text-decoration: none;
+        &:hover {
+            color: @alt-color;
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// mobile
+@media all and (min-width:0) and (max-width: 860px) {
+    .main, .foot, .wrap {
+        width: auto;
+    }
+    .foot {
+        padding: 0 1em;
+    }
+    .more {
+        float: none;
+        &.ical { margin-top: 0; }
+    }
+}
+
+@media all and (min-width:0) and (max-width: 720px) {
+    .main, .main .side, .main .content { display: block; width: auto; border: none; box-shadow:none; }
+    .main .content .wrap { margin: 1em; }
+    .events-table { margin: 0 -1em; width: auto; display: block; }
+    .events-table section { display: block; width: auto;
+        &.regular-events { border: none; box-shadow: none; }
+    }
+    .side { .news, .events { display: none; }}
+
+    .foot ul li { margin-left: 0; }
+}
+
+@media all and (min-width:0) and (max-width: 320px) {
+    .nav {
+        font-size: 0.75em;
+    }
+    .content .events, .content .news {
+        width: auto;
+        display: block;
+    }
+}

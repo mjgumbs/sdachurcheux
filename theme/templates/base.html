@@ -1,0 +1,77 @@
+{% load static from staticfiles %}{% load page_tags news_tags events_tags %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}SDA Church EUX{% endblock %}</title>
+    <meta name="author" content="DjangoChurch">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <!--[if lt IE 9]>
+        <script src="{% static 'js/modernizr.js' %}"></script>
+    <![endif]-->
+    {% block endhead %}{% endblock %}
+</head>
+<body>
+
+<main class="page">
+    <header class="head">
+        <div class="wrap">
+            <h1><a href="/">SDA Church EUX</a></h1>
+            <nav class="nav">
+                {% block nav %}
+                <ul>
+                    <input type="checkbox" id="toggle-nav" />
+                    <label for="toggle-nav" class="toggle-nav" onclick></label>
+                    <ul class="menu-nav">
+                        {% get_root_pages page as root_pages %}
+                        {% for page, page_active in root_pages %}
+                            <li><a href="{{ page.get_absolute_url }}"{% if page_active %} class="active"{% endif %}>{{ page.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </ul>
+                {% endblock nav %}
+            </nav>
+        </div>
+    </header>
+
+    <div class="main">
+        <aside class="side">
+            <div class="box">
+                <nav class="subnav">
+                    {% block subnav %}{% endblock %}
+                </nav>
+            </div>
+        </aside>
+        <article class="content box">
+            <div class="wrap">
+                {% block content %}{% endblock %}
+            </div>
+{#            <div class="news">#}
+{#                {% get_latest_news 1 as news_list %}#}
+{#                {% for news in news_list %}#}
+{#                    <h2><a href="{{ news.get_absolute_url }}">{{ news.title|truncatewords_html:'5' }}</a></h2>#}
+{#                    <p>{% firstof news.teaser|truncatewords_html:'10' news.content|truncatewords_html:"10" %} <a href="{{ news.get_absolute_url }}" title="{{ news.title }}">more</a></p>#}
+{#                    <h3><a href="{% url 'news:post-list' %}">More News...</a></h3>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div class="events">#}
+{#                {% get_upcoming_events 1 as events %}#}
+{#                {% for event in events %}#}
+{#                    <h2><a href="{{ event.get_absolute_url }}">{{ event.title|truncatewords_html:'5' }}</a></h2>#}
+{#                    <p>{{ event.description|truncatewords_html:'10' }} <a href="{{ event.get_absolute_url }}" title="{{ event.title }}">more</a></p>#}
+{#                    <h3><a href="{% url 'events:events-home' %}">More Events...</a></h3>#}
+{#                {% endfor %}#}
+{#            </div>#}
+        </article>
+    </div>
+</main>
+
+<footer class="foot">
+    <p>&copy; Copyright {% now 'Y' %}. All rights reserved.</p>
+    <ul>
+        <li><a href="#">Tel: 1721 586 6004</a></li>
+        <li><a href="#">Email: mjgumbs.200@gmail.com</a></li>
+    </ul>
+</footer>
+
+</body>
+</html>
